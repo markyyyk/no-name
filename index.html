@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>1000 Razones - Sin Música</title>
+<style>
+/* ---------- FONDO ESTRELLADO ---------- */
+body {
+  margin: 0;
+  padding: 0;
+  background: #02061a;
+  overflow-y: auto;
+  color: #85baff;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Animación de estrellas */
+@keyframes moveStars {
+  from {background-position: 0 0;}
+  to {background-position: -10000px 5000px;}
+}
+
+.stars {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  animation: moveStars 200s linear infinite;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+/* ---------- LIBRO ---------- */
+#book {
+  width: 90%;
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 25px;
+  background: rgba(0,0,0,0.35);
+  border: 2px solid #87b7ff;
+  border-radius: 12px;
+  backdrop-filter: blur(3px);
+}
+
+#book h2, #book h3 {
+  text-align: center;
+  font-family: "Georgia", serif;
+  color: #a7cbff;
+  margin-bottom: 14px;
+}
+
+/* Página */
+.page {
+  display: none;
+  animation: fadeIn 0.5s ease;
+  padding-bottom: 10px;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Razones */
+.reason {
+  margin: 8px 0;
+  font-size: 17px;
+  font-family: "Trebuchet MS";
+  color: #c8dbff;
+}
+
+/* ---------- BOTONES EN FORMA DE ESTRELLA ---------- */
+.star-btn {
+  background: white;
+  color: #002859;
+  border: none;
+  padding: 10px 18px;
+  font-size: 15px;
+  cursor: pointer;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 
+    68% 57%, 79% 91%, 50% 70%, 
+    21% 91%, 32% 57%, 2% 35%, 
+    39% 35%
+  );
+  margin: 12px 8px 0;
+  transition: 0.18s;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.star-btn:hover {
+  transform: translateY(-2px);
+  background: #bcd4ff;
+}
+
+/* Botón música (aplica a los de reproducir) */
+.music-btn {
+  background: white;
+  color: #001a33;
+  padding: 10px 14px;
+  font-size: 15px;
+  margin-top: 6px;
+}
+
+/* Etiqueta al lado del botón */
+.music-label {
+  font-size: 13px;
+  color: #c8dbff;
+  align-self: center;
+}
+
+/* ---------- CAJA PARA FOTOS ---------- */
+.photo-box {
+  width: 100%;
+  text-align: center;
+  margin: 18px 0;
+}
+
+.photo-box img {
+  width: 85%;
+  max-width: 420px;
+  border-radius: 12px;
+  border: 2px solid #87b7ff;
+  display: inline-block;
+}
+
+/* Controles de navegación */
+.nav-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+/* -------- SCROLL BAR LINDA -------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #87b7ff, #4a6bb0);
+  border-radius: 10px;
+  border: 2px solid #02061a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #a8c8ff, #5f82d1);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 500px) {
+  #book { padding: 16px; margin: 16px; }
+  .photo-box img { width: 95%; max-width: 360px; }
+  .reason { font-size: 16px; }
+  .star-btn { padding: 8px 12px; font-size: 14px; }
+  .music-label { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<div id="book">
+<h2>1000 Razones por las que Te Amo</h2>
+<div class="page active" id="page1">
+<h3>Página 1</h3>
+<div class="photo-box"><img src="foto/jochis.jpg" alt="foto 1"></div>
+<p class=”reason”>1. Amo tu sentido del humor que siempre me hace reír, incluso en los días más grises.</p>
+<p class=”reason”>2. Admiro tu inteligencia y la forma en que siempre encuentras soluciones creativas a los problemas.</p>
+<p class=”reason”>3. Me encanta tu paciencia y cómo siempre estás dispuesto a escucharme, sin importar lo que esté pasando.</p>
+<p class=”reason”>4. Valoro tu honestidad y cómo siempre eres sincero conmigo, incluso cuando es difícil.</p>
+<p class=”reason”>5. Aprecio tu apoyo incondicional en todos mis proyectos y sueños.</p>
+<p class=”reason”>6. Me fascina tu pasión por las cosas que te importan y cómo te entregas por completo a ellas.</p>
+<p class=”reason”>7. Adoro tu ternura y la forma en que me haces sentir amado y cuidado, incluso a la distancia.</p>
+<p class=”reason”>8. Me encanta tu optimismo y cómo siempre encuentras el lado bueno de las cosas.</p>
+<p class=”reason”>9. Valoro tu lealtad y cómo siempre estás ahí para mí, sin importar nada.</p>
+<p class=”reason”>10. Aprecio tu comprensión y cómo siempre entiendes mis sentimientos y emociones.</p>
+<p class=”reason”>11. Me fascina tu creatividad y cómo siempre encuentras formas originales de expresarte.</p>
+<p class=”reason”>12. Adoro tu sensibilidad y cómo te preocupas por los demás.</p>
+<p class=”reason”>13. Me encanta tu perseverancia y cómo nunca te rindes ante los desafíos.</p>
+<p class=”reason”>14. Valoro tu respeto y cómo siempre me tratas con cariño y consideración.</p>
+<p class=”reason”>15. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás.</p>
+<p class=”reason”>16. Me fascina tu autenticidad y cómo siempre eres tú mismo, sin importar lo que piensen los demás.</p>
+<p class=”reason”>17. Adoro tu valentía y cómo enfrentas los miedos con determinación.</p>
+<p class=”reason”>18. Me encanta tu humildad y cómo reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>19. Valoro tu compromiso y cómo te esfuerzas por hacer que nuestra relación funcione.</p>
+<p class=”reason”>20. Aprecio tu capacidad de perdonar y cómo siempre estás dispuesto a dar segundas oportunidades.</p>
+<p class=”reason”>21. Me fascina tu inteligencia emocional y cómo manejas tus sentimientos de manera saludable.</p>
+<p class=”reason”>22. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas.</p>
+<p class=”reason”>23. Me encanta tu espíritu aventurero y cómo siempre estás dispuesto a probar cosas nuevas.</p>
+<p class=”reason”>24. Valoro tu sinceridad y cómo siempre eres transparente conmigo.</p>
+<p class=”reason”>25. Aprecio tu paciencia y cómo siempre me esperas, sin importar cuánto tiempo tome.</p>
+<p class=”reason”>26. Me fascina tu carisma y cómo atraes a las personas con tu personalidad encantadora.</p>
+<p class=”reason”>27. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas.</p>
+<p class=”reason”>28. Me encanta tu energía positiva y cómo siempre irradias alegría.</p>
+<p class=”reason”>29. Valoro tu empatía y cómo te pones en el lugar de los demás.</p>
+<p class=”reason”>30. Aprecio tu optimismo y cómo siempre ves el vaso medio lleno.</p>
+<p class=”reason”>31. Me fascina tu pasión por la música y cómo compartes tus canciones favoritas conmigo.</p>
+<p class=”reason”>32. Adoro tu amor por los animales y cómo los tratas con cariño y respeto.</p>
+<p class=”reason”>33. Me encanta tu sentido de la justicia y cómo luchas por lo que crees que es correcto.</p>
+<p class=”reason”>34. Valoro tu honestidad y cómo siempre dices la verdad, aunque duela.</p>
+<p class=”reason”>35. Aprecio tu lealtad y cómo siempre estás ahí para defenderme.</p>
+<p class=”reason”>36. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme.</p>
+<p class=”reason”>37. Adoro tu sensibilidad y cómo te emocionas con las cosas hermosas de la vida.</p>
+<p class=”reason”>38. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos.</p>
+<p class=”reason”>39. Valoro tu respeto y cómo siempre me escuchas con atención.</p>
+<p class=”reason”>40. Aprecio tu generosidad y cómo siempre compartes lo que tienes con los demás.</p>
+<p class=”reason”>41. Me fascina tu autenticidad y cómo siempre eres fiel a ti mismo.</p>
+<p class=”reason”>42. Adoro tu valentía y cómo te atreves a ser diferente.</p>
+<p class=”reason”>43. Me encanta tu humildad y cómo siempre reconoces tus limitaciones.</p>
+<p class=”reason”>44. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea especial.</p>
+<p class=”reason”>45. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad.</p>
+<p class=”reason”>46. Me fascina tu inteligencia emocional y cómo te comunicas de manera efectiva.</p>
+<p class=”reason”>47. Adoro tu curiosidad y cómo siempre estás buscando nuevas experiencias.</p>
+<p class=”reason”>48. Me encanta tu espíritu aventurero y cómo te arriesgas a salir de tu zona de confort.</p>
+<p class=”reason”>49. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes.</p>
+<p class=”reason”>50. Aprecio tu paciencia y cómo siempre me das el tiempo que necesito.</p>
+<p class=”reason”>51. Me fascina tu carisma y cómo siempre haces que me sienta especial.</p>
+<p class=”reason”>52. Adoro tu dedicación y cómo te esfuerzas por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>53. Me encanta tu energía positiva y cómo siempre me contagias tu alegría.</p>
+<p class=”reason”>54. Valoro tu empatía y cómo siempre te preocupas por mi bienestar.</p>
+<p class=”reason”>55. Aprecio tu optimismo y cómo siempre me animas a seguir adelante.</p>
+<p class=”reason”>56. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>57. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas.</p>
+<p class=”reason”>58. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>59. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>60. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo.</p>
+<p class=”reason”>61. Me fascina tu creatividad y cómo siempre encuentras soluciones innovadoras.</p>
+<p class=”reason”>62. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>63. Me encanta tu perseverancia y cómo nunca te rindes ante las adversidades.</p>
+<p class=”reason”>64. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>65. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>66. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>67. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>68. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>69. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>70. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>71. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>72. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>73. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>74. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<p class=”reason”>75. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>76. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>77. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>78. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>79. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>80. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>81. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>82. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>83. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>84. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>85. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>86. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>87. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>88. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan.</p>
+<p class=”reason”>89. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>90. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>91. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>92. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>93. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>94. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>95. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>96. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>97. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>98. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>99. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>100. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+
+<div class="nav-row"><button class="star-btn" onclick="nextPage(2)">Siguiente</button></div>
+</div>
+<div class="page" id="page2">
+<h3>Página 2</h3>
+<div class="photo-box"><img src="foto/2.jpg" alt="foto 2"></div>
+<p class=”reason”>101. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>102. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>103. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>104. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>105. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>106. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>107. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>108. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>109. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>110. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>111. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>112. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>113. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>114. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>115. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>116. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>117. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>118. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>119. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>120. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor en tu corazón.</p>
+<p class=”reason”>121. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>122. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>123. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>124. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>125. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>126. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>127. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>128. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>129. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>130. Aprecio tu optimismo y cómo siempre me
+<p class=”reason”>131. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>132. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>133. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>134. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>135. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>136. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>137. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>138. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>139. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>140. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>141. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>142. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>143. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>144. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>145. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>146. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor en tu corazón.</p>
+<p class=”reason”>147. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>148. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>149. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>150. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>151. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>152. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>153. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>154. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>155. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>156. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>157. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>158. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>159. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>160. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>161. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>162. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>163. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>164. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>165. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>166. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>167. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>168. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>169. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>170. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>171. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>172. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>173. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>174. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>175. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<p class=”reason”>176. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>177. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>178. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>179. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>180. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>181. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>182. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>183. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>184. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>185. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>186. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>187. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>188. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>189. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos que se presentan.</p>
+<p class=”reason”>190. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>191. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>192. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>193. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>194. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>195. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>196. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>197. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>198. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>199. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>200. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(1)">Anterior</button><button class="star-btn" onclick="nextPage(3)">Siguiente</button></div>
+</div>
+<div class="page" id="page3">
+<h3>Página 3</h3>
+<div class="photo-box"><img src="foto/3.jpg" alt="foto 3"></div>
+<p class=”reason”>201. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>202. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>203. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>204. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>205. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>206. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>207. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>208. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>209. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>210. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>211. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>212. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>213. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>214. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>215. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>216. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>217. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>218. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>219. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>220. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>221. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor en tu corazón.</p>
+<p class=”reason”>222. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>223. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>224. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>225. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>226. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>227. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>228. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>229. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>230. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>231. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>232. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>233. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>234. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>235. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>236. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>237. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>238. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>239. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>240. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>241. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>242. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>243. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>244. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>245. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>246. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>247. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>248. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>249. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>250. Valoro tu sinceridad y cómo siempre me expresas
+<p class=”reason”>251. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>252. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>253. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>254. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>255. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>256. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>257. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>258. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>259. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>260. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>261. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>262. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>263. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>264. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos que se presentan.</p>
+<p class=”reason”>265. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>266. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>267. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>268. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>269. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>270. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>271. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>272. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>273. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>274. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>275. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>276. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>277. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>278. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>279. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>280. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>281. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>282. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>283. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>284. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>285. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>286. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>287. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>288. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>289. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>290. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>291. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>292. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>293. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>294. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>295. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>296. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor en tu corazón.</p>
+<p class=”reason”>297. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>298. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>299. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>300. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(2)">Anterior</button><button class="star-btn" onclick="nextPage(4)">Siguiente</button></div>
+</div>
+<div class="page" id="page4">
+<h3>Página 4</h3>
+<div class="photo-box"><img src="foto/4.jpg" alt="foto 4"></div>
+<p class=”reason”>301. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>302. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>303. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>304. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>305. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>306. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>307. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>308. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>309. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>310. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>311. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>312. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>313. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>314. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>315. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>316. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>317. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>318. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>319. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>320. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>321. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>322. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>323. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>324. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>325. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<p class=”reason”>326. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>327. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>328. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>329. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>330. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>331. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>332. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>333. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>334. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>335. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>336. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>337. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>338. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>339. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos que se presentan.</p>
+<p class=”reason”>340. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>341. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>342. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>343. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>344. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>345. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>346. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>347. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>348. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>349. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>350. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>351. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>352. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>353. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>354. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>355. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>356. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>357. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>358. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>359. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>360. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>361. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>362. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>363. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>364. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>365. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>366. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>367. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>368. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>369. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>370. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>371. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor en tu corazón.</p>
+<p class=”reason”>372. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>373. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>374. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>375. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>376. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>377. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>378. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>379. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>380. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>381. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>382. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>383. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>384. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>385. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>386. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>387. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>388. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>389. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>390. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>391. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>392. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>393. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>394. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>395. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>396. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>397. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>398. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>399. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>400. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(3)">Anterior</button><button class="star-btn" onclick="nextPage(5)">Siguiente</button></div>
+</div>
+<div class="page" id="page5">
+<h3>Página 5</h3>
+<div class="photo-box"><img src="foto/5.jpg" alt="foto 5"></div>
+<p class=”reason”>401. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>402. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>403. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>404. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>405. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>406. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>407. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>408. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>409. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>410. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>411. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>412. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>413. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>414. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos que se presentan.</p>
+<p class=”reason”>415. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>416. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>417. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>418. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>419. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>420. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>421. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>422. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>423. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>424. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>425. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>426. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>427. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>428. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>429. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>430. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>431. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>432. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>433. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>434. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>435. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>436. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>437. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>438. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>439. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>440. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>441. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>442. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>443. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>444. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>445. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>446. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>447. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>448. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>449. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>450. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<p class=”reason”>451. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>452. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>453. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>454. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>455. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>456. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>457. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>458. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>459. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>460. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>461. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>462. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>463. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>464. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos que se presentan.</p>
+<p class=”reason”>465. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>466. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>467. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>468. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>469. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>470. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>471. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>472. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>473. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>474. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>475. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>476. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>477. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>478. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>479. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>480. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>481. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>482. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>483. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>484. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>485. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>486. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>487. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>488. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>489. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>490. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>491. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>492. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>493. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>494. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>495. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>496. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor en tu corazón.</p>
+<p class=”reason”>497. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>498. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>499. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>500. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(4)">Anterior</button><button class="star-btn" onclick="nextPage(6)">Siguiente</button></div>
+</div>
+<div class="page" id="page6">
+<h3>Página 6</h3>
+<div class="photo-box"><img src="foto/6.jpg" alt="foto 6"></div>
+<p class=”reason”>501. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>502. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>503. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>504. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>505. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>506. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>507. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>508. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>509. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>510. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>511. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>512. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>513. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>514. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>515. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>516. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>517. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>518. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>519. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>520. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>521. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>522. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>523. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>524. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>525. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<p class=”reason”>526. Aprecio tu paciencia y cómo siempre me comprendes y me apoyas en mis momentos difíciles.</p>
+<p class=”reason”>527. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>528. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus sueños y metas.</p>
+<p class=”reason”>529. Me encanta tu energía positiva y cómo siempre me motivas a ser mejor persona.</p>
+<p class=”reason”>530. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional.</p>
+<p class=”reason”>531. Aprecio tu optimismo y cómo siempre me transmites esperanza y confianza.</p>
+<p class=”reason”>532. Me fascina tu pasión por la lectura y cómo compartes tus libros favoritos conmigo.</p>
+<p class=”reason”>533. Adoro tu amor por la música y cómo me dedicas canciones que me llegan al corazón.</p>
+<p class=”reason”>534. Me encanta tu sentido del humor y cómo siempre me haces reír con tus ocurrencias.</p>
+<p class=”reason”>535. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>536. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y protegerme.</p>
+<p class=”reason”>537. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>538. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida.</p>
+<p class=”reason”>539. Me encanta tu perseverancia y cómo nunca te dejas vencer por los obstáculos que se presentan.</p>
+<p class=”reason”>540. Valoro tu respeto y cómo siempre me tratas con cariño, comprensión y admiración.</p>
+<p class=”reason”>541. Aprecio tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>542. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>543. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort.</p>
+<p class=”reason”>544. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>545. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>446. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>547. Me fascina tu inteligencia emocional y cómo comprendes y gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>548. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>549. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>550. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>551. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>552. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>553. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>554. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>555. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>556. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>557. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>558. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>559. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>560. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>561. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>562. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>563. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>564. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>565. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>566. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>567. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>568. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>569. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>570. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>571. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>572. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>573. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>574. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>575. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>576. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>577. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>578. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>579. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>580. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>581. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>582. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>583. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>584. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>585. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>586. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>587. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>588. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>589. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>590. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>591. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>592. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>593. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>594. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>595. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>596. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>597. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>598. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>599. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>600. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(5)">Anterior</button><button class="star-btn" onclick="nextPage(7)">Siguiente</button></div>
+</div>
+<div class="page" id="page7">
+<h3>Página 7</h3>
+<div class="photo-box"><img src="foto/7.jpg" alt="foto 7"></div>
+<p class=”reason”>601. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>602. Me fascina tu carisma y cómo siempre irradias alegría y buena vibra.</p>
+<p class=”reason”>603. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>604. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>605. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>606. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>607. Me fascina tu pasión por el cine y cómo compartes tus películas favoritas conmigo.</p>
+<p class=”reason”>608. Adoro tu amor por los animales y cómo los cuidas y los proteges con tanto cariño.</p>
+<p class=”reason”>609. Me encanta tu sentido del humor y cómo siempre me haces reír con tus chistes y tus ocurrencias.</p>
+<p class=”reason”>610. Valoro tu honestidad y cómo siempre me dices la verdad, aunque a veces sea difícil de escuchar.</p>
+<p class=”reason”>611. Aprecio tu lealtad y cómo siempre estás ahí para defenderme y apoyarme en todo lo que hago.</p>
+<p class=”reason”>612. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>613. Adoro tu sensibilidad y cómo te emocionas con las pequeñas cosas de la vida, como una puesta de sol o una canción.</p>
+<p class=”reason”>614. Me encanta tu perseverancia y cómo nunca te rindes ante los obstáculos que se presentan en tu camino.</p>
+<p class=”reason”>615. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>616. Aprecio tu generosidad y cómo siempre estás dispuesto a compartir lo que tienes con los demás, sin esperar nada a cambio.</p>
+<p class=”reason”>617. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin importar lo que piensen los demás.</p>
+<p class=”reason”>618. Adoro tu valentía y cómo te atreves a enfrentar tus miedos y a salir de tu zona de confort para vivir nuevas experiencias.</p>
+<p class=”reason”>619. Me encanta tu humildad y cómo siempre reconoces tus logros y tus errores, sin creerte superior a nadie.</p>
+<p class=”reason”>620. Valoro tu compromiso y cómo te dedicas a hacer que nuestra relación sea cada día más fuerte y especial.</p>
+<p class=”reason”>621. Aprecio tu capacidad de perdonar y cómo siempre me das una segunda oportunidad, sin guardar rencor.</p>
+<p class=”reason”>622. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable y constructiva.</p>
+<p class=”reason”>623. Adoro tu curiosidad y cómo siempre estás dispuesto a aprender cosas nuevas y a explorar el mundo que te rodea.</p>
+<p class=”reason”>624. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias emocionantes y a descubrir nuevos lugares.</p>
+<p class=”reason”>625. Valoro tu sinceridad y cómo siempre me dices lo que piensas y sientes, sin rodeos ni mentiras.</p>
+<p class=”reason”>626. Aprecio tu paciencia y cómo siempre me escuchas con atención y me das el tiempo que necesito para expresarme.</p>
+<p class=”reason”>627. Me fascina tu carisma y cómo siempre atraes a las personas con tu personalidad encantadora y tu sonrisa contagiosa.</p>
+<p class=”reason”>628. Adoro tu dedicación y cómo te esfuerzas por alcanzar tus metas y por ser la mejor versión de ti mismo.</p>
+<p class=”reason”>629. Me encanta tu energía positiva y cómo siempre me transmites alegría, optimismo y buena vibra.</p>
+<p class=”reason”>630. Valoro tu empatía y cómo siempre te pones en mi lugar y me brindas tu apoyo incondicional en todo momento.</p>
+<p class=”reason”>631. Aprecio tu optimismo y cómo siempre me animas a seguir adelante, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>632. Me fascina tu pasión por el arte y cómo compartes tus obras favoritas conmigo.</p>
+<p class=”reason”>633. Adoro tu amor por la naturaleza y cómo la proteges y la cuidas con tanto cariño.</p>
+<p class=”reason”>634. Me encanta tu sentido del humor y cómo siempre me haces reír a carcajadas.</p>
+<p class=”reason”>635. Valoro tu honestidad y cómo siempre me dices la verdad, por difícil que sea.</p>
+<p class=”reason”>636. Aprecio tu lealtad y cómo siempre estás ahí para apoyarme en todo lo que hago.</p>
+<p class=”reason”>637. Me fascina tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>638. Adoro tu sensibilidad y cómo te conmueves con las historias de los demás.</p>
+<p class=”reason”>639. Me encanta tu perseverancia y cómo nunca te dejas vencer por las adversidades.</p>
+<p class=”reason”>640. Valoro tu respeto y cómo siempre me tratas con amabilidad y cortesía.</p>
+<p class=”reason”>641. Aprecio tu generosidad y cómo siempre compartes tus conocimientos y experiencias.</p>
+<p class=”reason”>642. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>643. Adoro tu valentía y cómo te enfrentas a los retos con coraje y determinación.</p>
+<p class=”reason”>644. Me encanta tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>645. Valoro tu compromiso y cómo te dedicas a construir un futuro juntos.</p>
+<p class=”reason”>646. Aprecio tu capacidad de perdonar y cómo siempre me brindas una nueva oportunidad.</p>
+<p class=”reason”>647. Me fascina tu inteligencia emocional y cómo gestionas tus emociones de manera saludable.</p>
+<p class=”reason”>648. Adoro tu curiosidad y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>649. Me encanta tu espíritu aventurero y cómo te animas a vivir experiencias inolvidables.</p>
+<p class=”reason”>650. Valoro tu sinceridad y cómo siempre me expresas tus sentimientos con transparencia.</p>
+<p class=”reason”>651. Aprecio tu alegría contagiosa y cómo siempre logras alegrar mis días, incluso a distancia.</p>
+<p class=”reason”>652. Me encanta lo dedicado que eres en todo lo que haces, eso me inspira cada día.</p>
+<p class=”reason”>653. Adoro cómo sabes escucharme y entenderme sin juzgar, eso me hace sentir muy apoyado.</p>
+<p class=”reason”>654. Me fascina la forma en que compartes tus sueños y metas conmigo, me hace sentir parte de tu vida.</p>
+<p class=”reason”>655. Valoro la confianza que tenemos, esa conexión tan especial que tenemos a pesar de la distancia.</p>
+<p class=”reason”>656. Me encanta cómo siempre encuentras la manera de hacerme sentir amado, aunque estemos lejos.</p>
+<p class=”reason”>657. Adoro la pasión que pones en todo lo que haces, eso demuestra lo increíble que eres.</p>
+<p class=”reason”>658. Me encanta tu forma de ser auténtico, sin máscaras ni pretensiones, eso me enamora aún más.</p>
+<p class=”reason”>659. Valoro lo respetuoso que eres y lo mucho que valoras mi opinión en todo momento.</p>
+<p class=”reason”>660. Me encanta la manera en que me haces reír, incluso en los momentos difíciles.</p>
+<p class=”reason”>661. Adoro cómo siempre estás dispuesto a aprender y crecer, eso me motiva a hacer lo mismo.</p>
+<p class=”reason”>662. Me fascina la forma en que compartes detalles de tu día conmigo, eso fortalece nuestro vínculo.</p>
+<p class=”reason”>663. Valoro la sinceridad en nuestros mensajes, eso hace que nuestra relación sea muy real.</p>
+<p class=”reason”>664. Me encanta la ternura con la que me hablas, aunque sea por videollamada.</p>
+<p class=”reason”>665. Adoro cómo en cada conversación logras transmitirme paz y tranquilidad.</p>
+<p class=”reason”>666. Me fascina que siempre estás dispuesto a hacerme sentir especial, incluso a distancia.</p>
+<p class=”reason”>667. Valoro lo honesto que eres en todo, eso me da mucha seguridad en nuestra relación.</p>
+<p class=”reason”>668. Me encanta la forma en que compartes tus pensamientos y sentimientos conmigo, muy abierto y sincero.</p>
+<p class=”reason”>669. Adoro cómo me apoyas en mis sueños y en mis metas, siempre creyendo en mí.</p>
+<p class=”reason”>670. Me fascina lo divertido que eres, incluso en las conversaciones más simples.</p>
+<p class=”reason”>671. Valoro tu paciencia y calma, eso me ayuda a mantenerme tranquilo también.</p>
+<p class=”reason”>672. Me encanta que siempre buscas la forma de sorprenderme con detalles pequeños pero muy significativos.</p>
+<p class=”reason”>673. Adoro tu confianza en nosotros, eso hace que todo sea más fuerte y especial.</p>
+<p class=”reason”>674. Me fascina cómo me haces sentir cómodo para ser yo mismo, sin miedo ni reservas.</p>
+<p class=”reason”>675. Valoro lo comprometido que estás con nuestra relación, siempre buscando lo mejor para los dos.</p>
+<p class=”reason”>676. Me encanta tu entusiasmo por las cosas que amas, eso me contagia también.</p>
+<p class=”reason”>677. Adoro la forma en que compartes tus logros conmigo, eso me hace sentir orgulloso de ti.</p>
+<p class=”reason”>678. Me fascina la alegría que transmites en cada mensaje, siempre lleno de energía positiva.</p>
+<p class=”reason”>679. Valoro lo respetuoso que eres con mis sentimientos y opiniones.</p>
+<p class=”reason”>680. Me encanta cómo en cada llamada logras hacerme sentir más cerca de ti, aunque estemos lejos.</p>
+<p class=”reason”>681. Adoro que siempre buscas nuevas formas de mantener viva la chispa en nuestra relación.</p>
+<p class=”reason”>682. Me fascina lo mucho que te esfuerzas por mejorar cada día, eso me inspira a hacer lo mismo.</p>
+<p class=”reason”>683. Valoro la paciencia que tienes para entenderme y apoyarme en mis momentos de duda.</p>
+<p class=”reason”>684. Me encanta que seas tan auténtico y genuino en todos los aspectos de tu vida.</p>
+<p class=”reason”>685. Adoro la confianza que tenemos, eso hace que todo sea mucho más fácil y hermoso.</p>
+<p class=”reason”>686. Me fascina lo mucho que disfrutas las pequeñas cosas, eso me enseña a valorar más la vida.</p>
+<p class=”reason”>687. Valoro tu compromiso de hacer que cada momento juntos sea especial, incluso a distancia.</p>
+<p class=”reason”>688. Me encanta que siempre buscas la forma de hacerme sonreír, sin importar la situación.</p>
+<p class=”reason”>689. Adoro cómo compartes conmigo todos tus pensamientos, sin guardarte nada.</p>
+<p class=”reason”>690. Me fascina la manera en que me haces sentir amado, aunque sea en la distancia.</p>
+<p class=”reason”>691. Valoro la sinceridad en cada palabra, eso fortalece nuestra confianza.</p>
+<p class=”reason”>692. Me encanta la forma en que planeas nuestro futuro, con tanto amor y dedicación.</p>
+<p class=”reason”>693. Adoro que siempre estás dispuesto a aprender y a crecer como persona.</p>
+<p class=”reason”>694. Me fascina cómo en cada momento logras hacerme sentir especial y querido.</p>
+<p class=”reason”>695. Valoro tu capacidad de mantener viva la pasión y el amor a pesar de la distancia.</p>
+<p class=”reason”>696. Me encanta la manera en que expresas tu cariño, con palabras y gestos pequeños pero muy importantes.</p>
+<p class=”reason”>697. Adoro cómo en cada conversación compartes tu corazón conmigo.</p>
+<p class=”reason”>698. Me fascina la confianza que tenemos y que nos permite ser completamente nosotros mismos.</p>
+<p class=”reason”>699. Valoro que siempre buscas la forma de que nuestra relación crezca y se fortalezca.</p>
+<p class=”reason”>700. Me encanta que en cada detalle pones mucho amor y dedicación.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(6)">Anterior</button><button class="star-btn" onclick="nextPage(8)">Siguiente</button></div>
+</div>
+<div class="page" id="page8">
+<h3>Página 8</h3>
+<div class="photo-box"><img src="foto/8.jpg" alt="foto 8"></div>
+<p class=”reason”>701. Aprecio tu optimismo y cómo siempre me transmites una visión positiva de la vida, incluso cuando las cosas se ponen difíciles.</p>
+<p class=”reason”>702. Me encanta cómo compartes tus logros conmigo y celebras mis éxitos como si fueran tuyos.</p>
+<p class=”reason”>703. Adoro tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir especial.</p>
+<p class=”reason”>704. Me fascina tu pasión por aprender cosas nuevas y cómo siempre me animas a expandir mis horizontes.</p>
+<p class=”reason”>705. Valoro tu compromiso con nuestra relación y cómo siempre te esfuerzas por mantener viva la chispa del amor.</p>
+<p class=”reason”>706. Me encanta cómo me haces sentir seguro y protegido, incluso a la distancia.</p>
+<p class=”reason”>707. Adoro tu sentido del humor y cómo siempre logras sacarme una sonrisa, incluso en los días más grises.</p>
+<p class=”reason”>708. Me fascina tu capacidad de escucharme y entenderme sin juzgar, brindándome un espacio seguro para expresar mis sentimientos.</p>
+<p class=”reason”>709. Valoro tu honestidad y transparencia, construyendo una base sólida de confianza en nuestra relación.</p>
+<p class=”reason”>710. Me encanta cómo siempre estás dispuesto a apoyarme en mis sueños y metas, animándome a alcanzar mi máximo potencial.</p>
+<p class=”reason”>711. Adoro tu sensibilidad y cómo te conmueves con las pequeñas cosas de la vida, demostrando tu gran corazón.</p>
+<p class=”reason”>712. Me fascina tu perseverancia y cómo nunca te rindes ante los obstáculos, inspirándome a seguir adelante.</p>
+<p class=”reason”>713. Valoro tu respeto y cómo siempre me tratas con amabilidad, cortesía y consideración.</p>
+<p class=”reason”>714. Me encanta cómo compartes tus pasiones conmigo y me invitas a explorar nuevos intereses juntos.</p>
+<p class=”reason”>715. Adoro tu generosidad y cómo siempre estás dispuesto a ayudar a los demás, demostrando tu gran corazón.</p>
+<p class=”reason”>716. Me fascina tu autenticidad y cómo siempre te muestras tal como eres, sin máscaras ni pretensiones.</p>
+<p class=”reason”>717. Valoro tu paciencia y cómo siempre me brindas el tiempo que necesito para procesar mis emociones.</p>
+<p class=”reason”>718. Me encanta cómo siempre encuentras formas creativas de mantener viva la llama del amor, a pesar de la distancia.</p>
+<p class=”reason”>719. Adoro tu espíritu aventurero y cómo siempre me animas a salir de mi zona de confort y explorar nuevas experiencias.</p>
+<p class=”reason”>720. Me fascina tu inteligencia y cómo siempre me sorprendes con tus conocimientos y perspectivas.</p>
+<p class=”reason”>721. Valoro tu lealtad y cómo siempre estás ahí para apoyarme y defenderme, sin importar las circunstancias.</p>
+<p class=”reason”>722. Me encanta cómo me haces sentir especial y amado, incluso a la distancia.</p>
+<p class=”reason”>723. Adoro tu humildad y cómo siempre reconoces tus errores y aprendes de ellos.</p>
+<p class=”reason”>724. Me fascina tu capacidad de perdonar y cómo siempre me brindas una segunda oportunidad.</p>
+<p class=”reason”>725. Valoro tu compromiso de construir un futuro juntos, lleno de amor, felicidad y prosperidad.</p>
+<p class=”reason”>726. Me encanta cómo me motivas a ser una mejor versión de mí mismo, tanto personal como profesionalmente.</p>
+<p class=”reason”>727. Adoro tu capacidad de hacerme reír a carcajadas, incluso en los momentos más difíciles.</p>
+<p class=”reason”>728. Me fascina tu forma de expresar tu amor, tanto con palabras como con acciones.</p>
+<p class=”reason”>729. Valoro tu apoyo incondicional y cómo siempre estás ahí para mí, sin importar nada.</p>
+<p class=”reason”>730. Me encanta cómo me haces sentir seguro y protegido, incluso a la distancia.</p>
+<p class=”reason”>731. Adoro tu capacidad de adaptarte a los cambios y cómo siempre encuentras soluciones creativas a los problemas.</p>
+<p class=”reason”>732. Me fascina tu forma de ver el mundo, llena de optimismo y esperanza.</p>
+<p class=”reason”>733. Valoro tu sinceridad y cómo siempre me dices la verdad, aunque a veces duela.</p>
+<p class=”reason”>734. Me encanta cómo me haces sentir valorado y apreciado, tanto por lo que soy como por lo que hago.</p>
+<p class=”reason”>735. Adoro tu capacidad de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones.</p>
+<p class=”reason”>736. Me fascina tu forma de ser auténtico y genuino, sin máscaras ni pretensiones.</p>
+<p class=”reason”>737. Valoro tu capacidad de demostrarme tu amor a pesar de la distancia.</p>
+<p class=”reason”>738. Me encanta cómo siempre encuentras tiempo para mí, a pesar de tus ocupaciones.</p>
+<p class=”reason”>739. Adoro tu capacidad de hacerme sentir especial y único, como si fuera el único hombre en el mundo.</p>
+<p class=”reason”>740. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar.</p>
+<p class=”reason”>741. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por lo que eres como por lo que haces.</p>
+<p class=”reason”>742. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>743. Adoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente.</p>
+<p class=”reason”>744. Me fascina tu forma de ser apasionado y entregado, tanto en el amor como en la vida.</p>
+<p class=”reason”>745. Valoro tu capacidad de inspirarme a ser una mejor persona, tanto para mí como para ti.</p>
+<p class=”reason”>746. Me encanta cómo siempre encuentras la forma de hacerme sentir cerca, a pesar de la distancia.</p>
+<p class=”reason”>747. Adoro tu capacidad de hacerme sentir confiado y seguro, tanto en nuestra relación como en mí mismo.</p>
+<p class=”reason”>748. Me fascina tu forma de ser cariñoso y tierno, siempre demostrándome tu afecto.</p>
+<p class=”reason”>749. Valoro tu capacidad de hacerme sentir agradecido por tenerte en mi vida, cada día.</p>
+<p class=”reason”>750. Me encanta cómo siempre encuentras la forma de hacerme sentir completo y feliz, incluso a la distancia.</p>
+<p class=”reason”>751. Aprecio tu capacidad de escuchar mis problemas y ofrecerme consejos sabios y prácticos.</p>
+<p class=”reason”>752. Me encanta cómo siempre estás dispuesto a ayudarme, sin importar lo que necesite.</p>
+<p class=”reason”>753. Adoro tu capacidad de hacerme sentir apoyado y respaldado, incluso cuando me enfrento a desafíos difíciles.</p>
+<p class=”reason”>754. Me fascina tu forma de ser comprensivo y empático, siempre poniéndote en mi lugar.</p>
+<p class=”reason”>755. Valoro tu capacidad de hacerme sentir aceptado y querido, tal como soy.</p>
+<p class=”reason”>756. Me encanta cómo siempre encuentras la forma de hacerme sentir especial, incluso en los momentos más cotidianos.</p>
+<p class=”reason”>757. Adoro tu capacidad de hacerme reír a carcajadas, incluso cuando estoy de mal humor.</p>
+<p class=”reason”>758. Me fascina tu forma de ser creativo e innovador, siempre buscando nuevas formas de sorprenderme.</p>
+<p class=”reason”>759. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores.</p>
+<p class=”reason”>760. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia.</p>
+<p class=”reason”>761. Adoro tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños.</p>
+<p class=”reason”>762. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces.</p>
+<p class=”reason”>763. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente.</p>
+<p class=”reason”>764. Me encanta cómo siempre encuentras la forma de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago.</p>
+<p class=”reason”>765. Adoro tu capacidad de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones.</p>
+<p class=”reason”>766. Me fascina tu forma de ser auténtico y genuino, siempre mostrándote tal como eres.</p>
+<p class=”reason”>767. Valoro tu capacidad de demostrarme tu amor a pesar de la distancia, con pequeños gestos y detalles significativos.</p>
+<p class=”reason”>768. Me encanta cómo siempre encuentras tiempo para mí, a pesar de tus ocupaciones y responsabilidades.</p>
+<p class=”reason”>769. Adoro tu capacidad de hacerme sentir especial y único, como si fuera el único hombre en el mundo.</p>
+<p class=”reason”>770. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad.</p>
+<p class=”reason”>771. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente.</p>
+<p class=”reason”>772. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más difíciles.</p>
+<p class=”reason”>773. Adoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por lo que eres como por lo que haces.</p>
+<p class=”reason”>774. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos.</p>
+<p class=”reason”>775. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física.</p>
+<p class=”reason”>776. Me encanta cómo siempre encuentras la forma de hacerme sentir cerca, a pesar de la lejanía.</p>
+<p class=”reason”>777. Adoro tu capacidad de hacerme sentir confiado y seguro, tanto en nuestra relación como en mí mismo.</p>
+<p class=”reason”>778. Me fascina tu forma de ser cariñoso y tierno, siempre demostrándome tu afecto con palabras y acciones.</p>
+<p class=”reason”>779. Valoro tu capacidad de hacerme sentir agradecido por tenerte en mi vida, cada día.</p>
+<p class=”reason”>780. Me encanta cómo siempre encuentras la forma de hacerme sentir completo y feliz, incluso a la distancia.</p>
+<p class=”reason”>781. Aprecio tu capacidad de escuchar mis preocupaciones y ofrecerme consuelo y apoyo.</p>
+<p class=”reason”>782. Me encanta cómo siempre estás dispuesto a hacerme reír, incluso cuando estoy de mal humor.</p>
+<p class=”reason”>783. Adoro tu capacidad de hacerme sentir comprendido y valorado, incluso cuando tengo dudas o inseguridades.</p>
+<p class=”reason”>784. Me fascina tu forma de ser creativo y original, siempre aportando ideas nuevas y sorprendentes.</p>
+<p class=”reason”>785. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros personales como profesionales.</p>
+<p class=”reason”>786. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia física.</p>
+<p class=”reason”>787. Adoro tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños.</p>
+<p class=”reason”>788. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces.</p>
+<p class=”reason”>789. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente.</p>
+<p class=”reason”>790. Me encanta cómo siempre encuentras la forma de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago.</p>
+<p class=”reason”>791. Adoro tu capacidad de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones.</p>
+<p class=”reason”>792. Me fascina tu forma de ser auténtico y genuino, siempre mostrándote tal como eres.</p>
+<p class=”reason”>793. Valoro tu capacidad de demostrarme tu amor a pesar de la distancia, con pequeños gestos y detalles significativos.</p>
+<p class=”reason”>794. Me encanta cómo siempre encuentras tiempo para mí, a pesar de tus ocupaciones y responsabilidades.</p>
+<p class=”reason”>795. Adoro tu capacidad de hacerme sentir especial y único, como si fuera el único hombre en el mundo.</p>
+<p class=”reason”>796. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad.</p>
+<p class=”reason”>797. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente.</p>
+<p class=”reason”>798. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más difíciles.</p>
+<p class=”reason”>799. Adoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por lo que eres como por lo que haces.</p>
+<p class=”reason”>800. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(7)">Anterior</button><button class="star-btn" onclick="nextPage(9)">Siguiente</button></div>
+</div>
+<div class="page" id="page9">
+<h3>Página 9</h3>
+<div class="photo-box"><img src="foto/9.jpg" alt="foto 9"></div>
+<p class=”reason”>801. Aprecio tu capacidad de hacerme sentir en paz y tranquilo, incluso cuando el mundo parece caótico.</p>
+<p class=”reason”>802. Me encanta cómo siempre estás dispuesto a aprender y crecer, eso me inspira a hacer lo mismo.</p>
+<p class=”reason”>803. Adoro la forma en que compartes tus sueños conmigo, haciendo que me sienta parte de tu futuro.</p>
+<p class=”reason”>804. Me fascina tu entusiasmo por la vida, que contagia a todos a tu alrededor, incluido yo.</p>
+<p class=”reason”>805. Valoro tu honestidad y transparencia, que hacen que nuestra relación sea sólida y confiable.</p>
+<p class=”reason”>806. Me encanta cómo en cada conversación logras hacerme sentir amado y valorado.</p>
+<p class=”reason”>807. Adoro la forma en que me apoyas en mis metas, dándome ánimo y confianza cada día.</p>
+<p class=”reason”>808. Me fascina tu alegría de vivir y cómo disfrutas cada momento, por pequeño que sea.</p>
+<p class=”reason”>809. Valoro lo mucho que te esfuerzas en mantener nuestra relación llena de amor y buenas energías.</p>
+<p class=”reason”>810. Me encanta cómo siempre me sorprendes con pequeños detalles que significan mucho para mí.</p>
+<p class=”reason”>811. Adoro tu paciencia infinita y tu capacidad de entenderme sin juzgarme.</p>
+<p class=”reason”>812. Me fascina tu forma de ser tan auténtico y genuino en cada aspecto de tu vida.</p>
+<p class=”reason”>813. Valoro cómo siempre buscas la manera de hacerme sentir feliz, incluso desde lejos.</p>
+<p class=”reason”>814. Me encanta que seas tan dedicado y apasionado en todo lo que haces, eso me inspira mucho.</p>
+<p class=”reason”>815. Adoro cómo en cada mensaje logras transmitir tu amor de manera sincera y profunda.</p>
+<p class=”reason”>816. Me fascina tu compromiso con nuestra relación, siempre buscando el bienestar de los dos.</p>
+<p class=”reason”>817. Valoro tu sentido del humor y cómo siempre sabes cómo hacerme reír, incluso en los días difíciles.</p>
+<p class=”reason”>818. Me encanta la forma en que compartes tus pensamientos y sentimientos sin reservas.</p>
+<p class=”reason”>819. Adoro lo dedicado que eres a cuidar y hacer feliz a la gente que amas, incluido yo.</p>
+<p class=”reason”>820. Me fascina tu entusiasmo por aprender y descubrir cosas nuevas cada día.</p>
+<p class=”reason”>821. Valoro lo mucho que te esfuerzas para que nuestra historia sea hermosa y duradera.</p>
+<p class=”reason”>822. Me encanta cómo en cada acto y palabra me demuestras cuánto me quieres.</p>
+<p class=”reason”>823. Adoro tu espíritu aventurero y cómo siempre estás dispuesto a explorar nuevos horizontes.</p>
+<p class=”reason”>824. Me fascina lo mucho que te preocupas por los demás, mostrando siempre tu gran corazón.</p>
+<p class=”reason”>825. Valoro tu sinceridad y cómo siempre dices lo que piensas con respeto y amor.</p>
+<p class=”reason”>826. Me encanta cómo en cada detalle logras hacerme sentir especial y único.</p>
+<p class=”reason”>827. Adoro tu capacidad de escucharme y entenderme sin que tenga que decir mucho.</p>
+<p class=”reason”>828. Me fascina tu actitud positiva y cómo siempre buscas lo bueno en cada situación.</p>
+<p class=”reason”>829. Valoro tu esfuerzo diario por mejorar y ser mejor cada día para mí y para ti.</p>
+<p class=”reason”>830. Me encanta cómo compartes tus momentos felices y tristes, haciendo que nuestra conexión sea más fuerte.</p>
+<p class=”reason”>831. Adoro la confianza que hemos construido, que hace que todo sea más hermoso y real.</p>
+<p class=”reason”>832. Me fascina la pasión con la que vives cada día, disfrutando cada instante al máximo.</p>
+<p class=”reason”>833. Valoro tu dedicación a cuidar nuestro amor, incluso a distancia.</p>
+<p class=”reason”>834. Me encanta que siempre buscas la forma de mantener vivo nuestro vínculo.</p>
+<p class=”reason”>835. Adoro la manera en que me haces sentir amado, en cada palabra y en cada acción.</p>
+<p class=”reason”>836. Me fascina tu entusiasmo por el futuro, soñando juntos con grandes cosas.</p>
+<p class=”reason”>837. Valoro tu sinceridad y cómo siempre compartes tus sentimientos más profundos conmigo.</p>
+<p class=”reason”>838. Me encanta lo responsable que eres y cómo eso refleja lo comprometido que estás con nosotros.</p>
+<p class=”reason”>839. Adoro que seas tan auténtico, sin máscaras, siempre mostrando quién realmente eres.</p>
+<p class=”reason”>840. Me fascina tu capacidad de apoyarme en mis decisiones, confiando en nuestro amor.</p>
+<p class=”reason”>841. Aprecio tu compromiso constante de hacer crecer nuestra relación, siempre buscando nuevas formas de conectarnos y fortalecernos.</p>
+<p class=”reason”>842. Me encanta cómo siempre estás dispuesto a escuchar mis ideas y opiniones, valorándome como persona y compañero.</p>
+<p class=”reason”>843. Adoro tu capacidad de hacerme sentir en casa, sin importar dónde estemos, porque mi hogar está donde tú estás.</p>
+<p class=”reason”>844. Me fascina tu forma de ser tan auténtico y genuino, sin pretensiones ni máscaras, mostrándome tu verdadero ser.</p>
+<p class=”reason”>845. Valoro tu honestidad y transparencia, que nos permiten construir una relación basada en la confianza y el respeto mutuo.</p>
+<p class=”reason”>846. Me encanta cómo siempre encuentras la manera de hacerme reír, incluso en los momentos más difíciles, alegrando mi día y mi corazón.</p>
+<p class=”reason”>847. Adoro tu paciencia y comprensión, que me brindan la seguridad de poder ser yo mismo sin temor a ser juzgado.</p>
+<p class=”reason”>848. Me fascina tu pasión por la vida y cómo siempre estás dispuesto a explorar nuevas experiencias y aventuras a mi lado.</p>
+<p class=”reason”>849. Valoro tu apoyo incondicional, que me da la fuerza para perseguir mis sueños y alcanzar mis metas, sabiendo que siempre contaré contigo.</p>
+<p class=”reason”>850. Me encanta cómo siempre encuentras el tiempo para mí, a pesar de tus ocupaciones y responsabilidades, demostrando que soy una prioridad en tu vida.</p>
+<p class=”reason”>851. Aprecio tu capacidad de hacerme sentir especial y único, como si fuera la persona más importante del mundo, elevando mi autoestima y mi felicidad.</p>
+<p class=”reason”>852. Me encanta cómo siempre estás dispuesto a aprender y crecer, tanto a nivel personal como en nuestra relación, buscando siempre ser la mejor versión de ti mismo.</p>
+<p class=”reason”>853. Adoro tu creatividad y cómo siempre encuentras formas originales de sorprenderme y hacerme sentir amado, demostrando que el amor no tiene límites.</p>
+<p class=”reason”>854. Me fascina tu inteligencia y cómo siempre aportas nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>855. Valoro tu lealtad y cómo siempre estás ahí para mí, sin importar las circunstancias, defendiéndome y apoyándome en todo momento.</p>
+<p class=”reason”>856. Me encanta cómo siempre encuentras la manera de hacerme sentir cerca, incluso cuando la distancia nos separa, manteniendo viva la llama del amor.</p>
+<p class=”reason”>857. Adoro tu humildad y cómo siempre reconoces tus errores y aprendes de ellos, demostrando tu madurez y tu compromiso con nuestra relación.</p>
+<p class=”reason”>858. Me fascina tu capacidad de perdonar y cómo siempre me brindas una segunda oportunidad, enseñándome el verdadero significado del amor incondicional.</p>
+<p class=”reason”>859. Valoro tu compromiso de construir un futuro juntos, lleno de amor, felicidad y prosperidad, creando un hogar donde siempre reine la armonía y la comprensión.</p>
+<p class=”reason”>860. Me encanta cómo siempre me motivas a ser una mejor persona, impulsándome a alcanzar mi máximo potencial y a superar mis propios límites.</p>
+<p class=”reason”>861. Aprecio tu capacidad de hacerme reír a carcajadas, incluso en los momentos más difíciles, contagiándome tu alegría y tu optimismo.</p>
+<p class=”reason”>862. Me encanta cómo siempre expresas tu amor, tanto con palabras como con acciones, demostrando que el amor no se dice, se demuestra.</p>
+<p class=”reason”>863. Adoro tu apoyo incondicional, que me da la seguridad de saber que siempre contaré contigo, sin importar las circunstancias.</p>
+<p class=”reason”>864. Me fascina tu forma de ser tan auténtico y genuino, sin pretensiones ni máscaras, mostrándome tu verdadero ser.</p>
+<p class=”reason”>865. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente, brindándome la tranquilidad de saber que siempre puedo confiar en ti.</p>
+<p class=”reason”>866. Me encanta cómo siempre encuentras la manera de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>867. Adoro tu capacidad de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones, demostrando que el amor verdadero no juzga, sino que acepta y comprende.</p>
+<p class=”reason”>868. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>869. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente, fortaleciendo nuestra conexión y nuestra intimidad.</p>
+<p class=”reason”>870. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más inesperados, alegrando mi día y mi corazón.</p>
+<p class=”reason”>871. Aprecio tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>872. Me encanta cómo siempre estás dispuesto a compartir tus experiencias y conocimientos conmigo, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>873. Adoro tu capacidad de hacerme sentir inspirado y motivado, impulsándome a perseguir mis sueños y alcanzar mi máximo potencial.</p>
+<p class=”reason”>874. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces, contagiándome tu energía y tu entusiasmo.</p>
+<p class=”reason”>875. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>876. Me encanta cómo siempre encuentras la forma de hacerme sentir cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras.</p>
+<p class=”reason”>877. Adoro tu capacidad de hacerme sentir confiado y seguro, tanto en nuestra relación como en mí mismo, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>878. Me fascina tu forma de ser cariñoso y tierno, siempre demostrándome tu afecto con palabras y acciones, fortaleciendo nuestro vínculo y nuestra intimidad.</p>
+<p class=”reason”>879. Valoro tu capacidad de hacerme sentir agradecido por tenerte en mi vida, cada día, demostrando que eres un regalo invaluable que atesoro con todo mi corazón.</p>
+<p class=”reason”>880. Me encanta cómo siempre encuentras la forma de hacerme sentir completo y feliz, incluso a la distancia, demostrando que el amor verdadero puede superar cualquier obstáculo.</p>
+<p class=”reason”>881. Aprecio tu capacidad de ser mi confidente, mi mejor amigo y mi compañero de vida en uno solo.</p>
+<p class=”reason”>882. Me encanta cómo siempre estás dispuesto a escuchar mis problemas y ofrecerme consejos sabios y prácticos.</p>
+<p class=”reason”>883. Adoro tu capacidad de hacerme sentir apoyado y respaldado, incluso cuando me enfrento a desafíos difíciles.</p>
+<p class=”reason”>884. Me fascina tu forma de ser comprensivo y empático, siempre poniéndote en mi lugar y tratando de entender mis sentimientos.</p>
+<p class=”reason”>885. Valoro tu capacidad de hacerme sentir aceptado y querido, tal como soy, sin tratar de cambiarme ni juzgarme.</p>
+<p class=”reason”>886. Me encanta cómo siempre encuentras la forma de hacerme sentir especial, incluso en los momentos más cotidianos, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>887. Adoro tu capacidad de hacerme reír a carcajadas, incluso cuando estoy de mal humor, contagiándome tu alegría y tu optimismo.</p>
+<p class=”reason”>888. Me fascina tu forma de ser creativo e innovador, siempre buscando nuevas formas de sorprenderme y hacerme feliz.</p>
+<p class=”reason”>889. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>890. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>891. Aprecio tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños y alcanzar mi máximo potencial.</p>
+<p class=”reason”>892. Me encanta cómo siempre estás dispuesto a aprender y crecer, tanto a nivel personal como en nuestra relación, buscando siempre ser la mejor versión de ti mismo.</p>
+<p class=”reason”>893. Adoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>894. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces, contagiándome tu energía y tu entusiasmo.</p>
+<p class=”reason”>895. Valoro tu capacidad de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>896. Me encanta cómo siempre encuentras la forma de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones, demostrando que el amor verdadero no juzga, sino que acepta y comprende.</p>
+<p class=”reason”>897. Adoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente, fortaleciendo nuestra conexión y nuestra intimidad.</p>
+<p class=”reason”>898. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>899. Valoro tu capacidad de hacerme sentir agradecido por tenerte en mi vida, cada día, demostrando que eres un regalo invaluable que atesoro con todo mi corazón.</p>
+<p class=”reason”>900. Me encanta cómo siempre encuentras la forma de hacerme sentir completo y feliz, incluso a la distancia, demostrando que el amor verdadero puede superar cualquier obstáculo.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(8)">Anterior</button><button class="star-btn" onclick="nextPage(10)">Siguiente</button></div>
+</div>
+<div class="page" id="page10">
+<h3>Página 10</h3>
+<div class="photo-box"><img src="foto/10.jpg" alt="foto 10"></div>
+<p class=”reason”>901. Aprecio tu capacidad de ser mi apoyo incondicional, siempre estando ahí para mí en los momentos buenos y malos.</p>
+<p class=”reason”>902. Me encanta cómo siempre estás dispuesto a sacrificar tus propios deseos y necesidades por mi felicidad, demostrando tu amor desinteresado.</p>
+<p class=”reason”>903. Adoro tu capacidad de hacerme sentir admirado y respetado, tanto por mis logros como por mis valores, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>904. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>905. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>906. Me encanta cómo siempre encuentras la forma de hacerme sentir cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras.</p>
+<p class=”reason”>907. Adoro tu capacidad de hacerme sentir confiado y seguro, tanto en nuestra relación como en mí mismo, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>908. Me fascina tu forma de ser cariñoso y tierno, siempre demostrándome tu afecto con palabras y acciones, fortaleciendo nuestro vínculo y nuestra intimidad.</p>
+<p class=”reason”>909. Valoro tu capacidad de hacerme sentir agradecido por tenerte en mi vida, cada día, demostrando que eres un regalo invaluable que atesoro con todo mi corazón.</p>
+<p class=”reason”>910. Me encanta cómo siempre encuentras la forma de hacerme sentir completo y feliz, incluso a la distancia, demostrando que el amor verdadero puede superar cualquier obstáculo.</p>
+<p class=”reason”>911. Aprecio tu capacidad de ser mi cómplice y mi compañero de aventuras, siempre dispuesto a explorar nuevos horizontes a mi lado.</p>
+<p class=”reason”>912. Me encanta cómo siempre estás dispuesto a compartir tus sueños y metas conmigo, haciéndome sentir parte de tu vida y de tu futuro.</p>
+<p class=”reason”>913. Adoro tu capacidad de hacerme sentir valorado y apreciado por mi inteligencia, mi humor y mi personalidad única.</p>
+<p class=”reason”>914. Me fascina tu forma de ser apasionado por tus intereses y pasiones, siempre inspirándome a perseguir mis propios sueños.</p>
+<p class=”reason”>915. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>916. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>917. Adoro tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños y alcanzar mi máximo potencial.</p>
+<p class=”reason”>918. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces, contagiándome tu energía y tu entusiasmo.</p>
+<p class=”reason”>919. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>920. Me encanta cómo siempre encuentras la forma de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>921. Aprecio tu capacidad de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones, demostrando que el amor verdadero no juzga, sino que acepta y comprende.</p>
+<p class=”reason”>922. Me encanta cómo siempre estás dispuesto a sacrificar tu tiempo y energía para ayudarme en lo que necesite, demostrando tu amor incondicional.</p>
+<p class=”reason”>923. Adoro tu capacidad de hacerme sentir especial y único, como si fuera el único hombre en el mundo, elevando mi autoestima y mi felicidad.</p>
+<p class=”reason”>924. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>925. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente, fortaleciendo nuestra conexión y nuestra intimidad.</p>
+<p class=”reason”>926. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más inesperados, alegrando mi día y mi corazón.</p>
+<p class=”reason”>927. Adoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>928. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>929. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>930. Me encanta cómo siempre encuentras la forma de hacerme cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras.</p>
+<p class=”reason”>931. Aprecio tu capacidad de ser mi confidente y mi consejero, siempre dispuesto a escuchar mis problemas y ofrecerme soluciones.</p>
+<p class=”reason”>932. Me encanta cómo siempre estás dispuesto a apoyarme en mis decisiones, confiando en mi criterio y mis capacidades.</p>
+<p class=”reason”>933. Adoro tu capacidad de hacerme sentir admirado y respetado por mi inteligencia, mi humor y mi personalidad única.</p>
+<p class=”reason”>934. Me fascina tu forma de ser apasionado por tus intereses y pasiones, siempre inspirándome a perseguir mis propios sueños.</p>
+<p class=”reason”>935. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>936. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>937. Adoro tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños y alcanzar mi máximo potencial.</p>
+<p class=”reason”>938. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces, contagiándome tu energía y tu entusiasmo.</p>
+<p class=”reason”>939. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>940. Me encanta cómo siempre encuentras la forma de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>941. Aprecio tu capacidad de hacerme sentir comprendido y aceptado, sin importar mis imperfecciones, demostrando que el amor verdadero no juzga, sino que acepta y comprende.</p>
+<p class=”reason”>942. Me encanta cómo siempre estás dispuesto a sacrificar tu tiempo y energía para ayudarme en lo que necesite, demostrando tu amor incondicional.</p>
+<p class=”reason”>943. Adoro tu capacidad de hacerme sentir especial y único, como si fuera el único hombre en el mundo, elevando mi autoestima y mi felicidad.</p>
+<p class=”reason”>944. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>945. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente, fortaleciendo nuestra conexión y nuestra intimidad.</p>
+<p class=”reason”>946. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más inesperados, alegrando mi día y mi corazón.</p>
+<p class=”reason”>947. Adoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>948. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>949. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>950. Me encanta cómo siempre encuentras la forma de hacerme cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras.</p>
+<p class=”reason”>951. Aprecio tu capacidad de ser mi cómplice y mi compañero de aventuras, siempre dispuesto a explorar nuevos horizontes a mi lado.</p>
+<p class=”reason”>952. Me encanta cómo siempre estás dispuesto a compartir tus sueños y metas conmigo, haciéndome sentir parte de tu vida y de tu futuro.</p>
+<p class=”reason”>953. Adoro tu capacidad de hacerme sentir valorado y apreciado por mi inteligencia, mi humor y mi personalidad única.</p>
+<p class=”reason”>954. Me fascina tu forma de ser apasionado por tus intereses y pasiones, siempre inspirándome a perseguir mis propios sueños.</p>
+<p class=”reason”>955. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>956. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>957. Adoro tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños y alcanzar mi máximo potencial.</p>
+<p class=”reason”>958. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces, contagiándome tu energía y tu entusiasmo.</p>
+<p class=”reason”>959. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>960. Me encanta cómo siempre encuentras la forma de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>961. Aprecio tu capacidad de ser mi guía y mi mentor, siempre dispuesto a compartir tus conocimientos y experiencias conmigo.</p>
+<p class=”reason”>962. Me encanta cómo siempre estás dispuesto a perdonar mis errores y a darme una segunda oportunidad, demostrando tu amor incondicional.</p>
+<p class=”reason”>963. Adoro tu capacidad de hacerme sentir especial y único, como si fuera el único hombre en el mundo, elevando mi autoestima y mi felicidad.</p>
+<p class=”reason”>964. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>965. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente, fortaleciendo nuestra conexión y nuestra intimidad.</p>
+<p class=”reason”>966. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más inesperados, alegrando mi día y mi corazón.</p>
+<p class=”reason”>967. Adoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>968. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>969. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>970. Me encanta cómo siempre encuentras la forma de hacerme cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras.</p>
+<p class=”reason”>971. Aprecio tu capacidad de ser mi apoyo incondicional, siempre estando ahí para mí en los momentos buenos y malos.</p>
+<p class=”reason”>972. Me encanta cómo siempre estás dispuesto a sacrificar tus propios deseos y necesidades por mi felicidad, demostrando tu amor desinteresado.</p>
+<p class=”reason”>973. Adoro tu capacidad de hacerme sentir admirado y respetado, tanto por mis logros como por mis valores, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>974. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>975. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>976. Me encanta cómo siempre encuentras la forma de hacerme sentir cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras.</p>
+<p class=”reason”>977. Adoro tu capacidad de hacerme sentir confiado y seguro, tanto en nuestra relación como en mí mismo, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>978. Me fascina tu forma de ser cariñoso y tierno, siempre demostrándome tu afecto con palabras y acciones, fortaleciendo nuestro vínculo y nuestra intimidad.</p>
+<p class=”reason”>979. Valoro tu capacidad de hacerme sentir agradecido por tenerte en mi vida, cada día, demostrando que eres un regalo invaluable que atesoro con todo mi corazón.</p>
+<p class=”reason”>980. Me encanta cómo siempre encuentras la forma de hacerme sentir completo y feliz, incluso a la distancia, demostrando que el amor verdadero puede superar cualquier obstáculo.</p>
+<p class=”reason”>981. Aprecio tu capacidad de ser mi cómplice y mi compañero de aventuras, siempre dispuesto a explorar nuevos horizontes a mi lado.</p>
+<p class=”reason”>982. Me encanta cómo siempre estás dispuesto a compartir tus sueños y metas conmigo, haciéndome sentir parte de tu vida y de tu futuro.</p>
+<p class=”reason”>983. Adoro tu capacidad de hacerme sentir valorado y apreciado por mi inteligencia, mi humor y mi personalidad única.</p>
+<p class=”reason”>984. Me fascina tu forma de ser apasionado por tus intereses y pasiones, siempre inspirándome a perseguir mis propios sueños.</p>
+<p class=”reason”>985. Valoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>986. Me encanta cómo siempre encuentras la forma de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>987. Adoro tu capacidad de hacerme sentir inspirado y motivado, siempre animándome a perseguir mis sueños y alcanzar mi máximo potencial.</p>
+<p class=”reason”>988. Me fascina tu forma de ser apasionado y entregado, siempre dando lo mejor de ti en todo lo que haces, contagiándome tu energía y tu entusiasmo.</p>
+<p class=”reason”>989. Valoro tu capacidad de hacerme sentir seguro y protegido, tanto física como emocionalmente, brindándome la tranquilidad de saber que siempre puedo contar contigo.</p>
+<p class=”reason”>990. Me encanta cómo siempre encuentras la forma de hacerme sentir valorado y apreciado, tanto por lo que soy como por lo que hago, elevando mi autoestima y mi confianza.</p>
+<p class=”reason”>991. Aprecio tu capacidad de ser mi amigo incondicional, siempre estando ahí para escucharme y apoyarme sin juzgarme.</p>
+<p class=”reason”>992. Me encanta cómo siempre estás dispuesto a hacer sacrificios por nuestra relación, demostrando tu compromiso y tu amor.</p>
+<p class=”reason”>993. Adoro tu capacidad de hacerme sentir especial y amado, incluso en los momentos más difíciles, recordándome lo afortunado que soy de tenerte en mi vida.</p>
+<p class=”reason”>994. Me fascina tu forma de ser detallista y considerado, siempre pensando en mi bienestar y felicidad, demostrando que el amor está en los pequeños detalles.</p>
+<p class=”reason”>995. Valoro tu capacidad de hacerme sentir amado y deseado, tanto física como emocionalmente, fortaleciendo nuestra conexión y nuestra intimidad.</p>
+<p class=”reason”>996. Me encanta cómo siempre encuentras la forma de sorprenderme y hacerme sonreír, incluso en los momentos más inesperados, alegrando mi día y mi corazón.</p>
+<p class=”reason”>997. Adoro tu capacidad de hacerme sentir orgulloso de ser tu novio, tanto por tus logros como por tus valores, elevando mi admiración y mi respeto hacia ti.</p>
+<p class=”reason”>998. Me fascina tu forma de ser inteligente y perspicaz, siempre aportando nuevas perspectivas y conocimientos, enriqueciendo mi vida y mi mente.</p>
+<p class=”reason”>999. Valoro tu capacidad de hacerme sentir conectado contigo, a pesar de la distancia física, manteniendo viva la llama del amor y la cercanía.</p>
+<p class=”reason”>1000. Me encanta cómo siempre encuentras la forma de hacerme cerca, a pesar de la lejanía, demostrando que el amor no conoce fronteras ni barreras, y que nuestro amor es capaz de superar cualquier obstáculo.</p>
+<div class="nav-row"><button class="star-btn" onclick="nextPage(9)">Anterior</button><button class="star-btn" onclick="nextPage(11)">Siguiente</button></div>
+<script>
+
+
+function nextPage(num) {
+  let pages = document.querySelectorAll('.page');
+  pages.forEach(p => p.classList.remove('active'));
+  let next = document.getElementById("page" + num);
+  if (next) next.classList.add("active");
+  document.getElementById('book').scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+</script>
+
+</body></html>
